@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <title>HElLDOC Health Inc.</title>
+
+    <!-- import fhir-client library-->
+
+    <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="./app.css" />
+
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="header-section1">
+            <h1>Cerner Provider App</h1>
+        </div>
+
+        <div class="header-section2">
+            <h2 id="patient_header"> Patient Details</h2>
+            <div class="row">
+                <div class="col3">
+                    <div>Patient: <span id="patientS"></span></div>
+                    <div>Ethnicity: <span id="ethnicityS"></span></div>
+                </div>
+                <div class="col3">
+                    <div>CID: <span id="cidS"></span></div>
+                    <div>Race: <span id="raceS"></span></div>
+                </div>
+                <div class="col3">
+                    <div>DOB: <span id="dobS"></span></div>
+                    <div>Address: <span id="addressS"></span></div>
+                </div>
+                <div class="col3">
+                    <div>Gender: <span id="genderS"></span></div>
+                    <div>Phone: <span id="phoneS"></span></div>
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <div class="header-section3">
+            <h4>Patient Information:</h4>
+            <pre id="info">Loading...</pre>
+        </div>
+
+
+    </div>
+
+
+    <script type="text/javascript">
+
+        function getExtensionValue(pt, reqVal) {
+            for (var i = 0; i < pt.extension.length; i++) {
+                console.log(pt.extension[i].url);
+                if (pt.extension[i].url !=null && pt.extension[i].url == reqVal) {
+                    if (pt.extension[i].extension[0].valueCoding!=null){
+                    return pt.extension[i].extension[0].valueCoding.display;
+                    }else {
+                        return pt.extension[i].extension[0].valueString;
+                    }
+                }
+            }
+            return 'N/A'
+        }
+
+        
+        // Request current logged in Patient Data using fhir-client library and updates DOM on successful response
+
+        FHIR.oauth2.ready().then(async (client) => {
+            console.log('loading data....');
+            console.log(client);
+            console.log(client.state.tokenResponse.access_token);
+            return client.patient.read()
+
+        }).then(
+
+            function (pt) {
+                console.log('pt is::');
+                console.log(pt);
+                document.getElementById('patient_header').innerText = (pt.name[0].prefix || '') + pt.name[0].given.join(' ') + ' ' + pt.name[0].family;
+
+                document.getElementById('patientS').innerText = (pt.name[0].text || pt.name[0].given);
+                document.getElementById('ethnicityS').innerText = getExtensionValue(pt,'http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity');
+                document.getElementById('cidS').innerText = pt.identifier[0].id;
+                document.getElementById('raceS').innerText = getExtensionValue(pt,'http://hl7.org/fhir/us/core/StructureDefinition/us-core-race');
+                document.getElementById('dobS').innerText = pt.birthDate;
+                document.getElementById('addressS').innerText = pt.address[0].line[0];
+                document.getElementById('genderS').innerText = pt.gender;
+                document.getElementById('phoneS').innerText = pt.telecom[0].value || 'N/A';
+
+                document.getElementById('info').innerText = JSON.stringify(pt, null, '\t')
+
+            },
+
+            function (error) {
+
+                document.getElementById('patient_header').innerText = 'Error Occurred'
+
+                document.getElementById('info').innerText = error.stack
+
+            },
+
+        ).catch(console.error)
+
+    </script>
+
+</body>
+
+</html>

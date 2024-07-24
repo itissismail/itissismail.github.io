@@ -1,0 +1,13 @@
+{
+    "name": "smart_patient_app",
+    "version": "1.0.0",
+    "scripts": {
+      "serve": "http-server -p 9201 -c-1",
+      "start": "npm run serve"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+     "http-server": "^0.12.3"
+    }
+  }

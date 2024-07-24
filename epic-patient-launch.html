@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>SMART: Patient App</title>
+    <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>
+</head>
+<body>
+<script>
+    FHIR.oauth2.authorize({
+        // this value should match with the value in the OIC Client config
+         //clientId: "patient_app_local", //SMILECDR
+        clientId: "e954d3b2-761b-4b04-a0ba-e405f2b1f960", //EPIC IQG-TEST-PATIENT-APP
+        
+        scope: "patient/*.* user/*.* openid fhirUser launch launch/patient",
+        //-----------------------------CERNER---------------------------------------
+        //clientId: "ddcff9b7-f9dc-4f56-80b5-244f98cb3b7e", //CERNER Provider
+        //scope: "patient/Patient.read patient/Observation.read openid fhirUser",
+        //--------------------------------------------------------------------
+        //clientId: "46a7f250-3972-4256-affe-ff13d9d35336", //CERNER Patient
+        //scope: "patient/Patient.read patient/Immunization.read launch/patient online_access openid profile fhirUser",
+        // this list should not include any scope that is
+        // not mentioned in the Client configuration
+        //scope: "openid launch/patient patient/*.read offline_access",
+        //scope: "patient/*.* user/*.* openid fhirUser launch launch/patient",
+        // (Optional) many servers are capable of using index.html by default
+        redirectUri: 'http://localhost:9201/epic-patient-index.html',
+    });
+</script>
+</body>
+</html>
