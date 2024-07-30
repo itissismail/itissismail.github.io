@@ -6,61 +6,232 @@
 
     <meta charset="UTF-8" />
 
-    <title>HElLDOC Health Inc.</title>
+    <title>EPIC Provider App</title>
 
     <!-- import fhir-client library-->
 
     <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./app.css" />
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Gothic+Coding&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <div class="wrapper">
+        <div class="main-wrapper">
+            <div class="sidebar-left">
+                EHR Sidebar
+            </div>
+            <div class="body-wrapper">
+                <div class="ehr-header">
+                    <h3 style="color: #3c763d;">Simulated EHR:: EPIC</h3>
+                    <div style="text-align: right;"><i class="fa fa-user user"></i>&nbsp; Provider: <b style="color: #0053a1;" id="practID"></b><p id="practTel"></p></div>
+                </div>
+                
+                <div class="header-section2">
+                    <!-- <h2 id="patient_header"> Patient Details</h2> -->
+                    <div class="row">
+                        <div class="col3">
+                            <div>Patient: <span id="patientS"></span></div>
+                            <div>Ethnicity: <span id="ethnicityS"></span></div>
+                        </div>
+                        <div class="col3">
+                            <div>CID: <span id="cidS"></span></div>
+                            <div>Race: <span id="raceS"></span></div>
+                        </div>
+                        <div class="col3">
+                            <div>DOB: <span id="dobS"></span></div>
+                            <div>Address: <span id="addressS"></span></div>
+                        </div>
+                        <div class="col3">
+                            <div>Gender: <span id="genderS"></span></div>
+                            <div>Phone: <span id="phoneS"></span></div>
+                        </div>
+                    </div>
 
-        <div class="header-section1">
-            <h1>EPIC Provider App</h1>
+
+
+                </div>
+
+
+                <div class="box-row">
+                    <div class="box-tile">
+                        <div class="box-header">
+                            <div class="box-no">
+                                1
+                            </div>
+                            <div class="box-title">
+                                Simple Directive 1
+                            </div>
+                            <div class="add-fav">
+                                <i class="fa fa-heart-o"></i>
+                            </div>
+                        </div>
+                        <div class="box-statue">
+                            <span>Status</span>
+                            <span class="status-label">active</span>
+                        </div>
+                        <div class="box-disc">
+                            <p>An advance directive is a statement made by a competent person, directing his or her medical care</p>
+                        </div>
+                        <div class="disclaimer">
+                            <strong>Disclaimer:</strong>
+                            <p>This Document may not be the latest one.</p>
+                        </div>
+                        <div class="box-statue">
+                            <span>Type:</span>
+                            <span class="type-label">PDF</span>
+                        </div>
+                        <button class="detail-btn"> View Details</button>
+                    </div>  
+
+                    <div class="box-tile">
+                        <div class="box-header">
+                            <div class="box-no">
+                                2
+                            </div>
+                            <div class="box-title">
+                                Patient Directive # 2
+                            </div>
+                            <div class="add-fav">
+                                <i class="fa fa-heart-o"></i>
+                            </div>
+                        </div>
+                        <div class="box-statue">
+                            <span>Status</span>
+                            <span class="status-label">active</span>
+                        </div>
+                        <div class="box-disc">
+                            <p>An advance directive is a statement made by a competent person, directing his or her medical care</p>
+                        </div>
+                        <div class="disclaimer">
+                            <strong>Disclaimer:</strong>
+                            <p>This Document may not be the latest one.</p>
+                        </div>
+                        <div class="box-statue">
+                            <span>Type:</span>
+                            <span class="type-label">PDF</span>
+                        </div>
+                        <button class="detail-btn"> View Details</button>
+                    </div>
+
+                    <div class="box-tile">
+                        <div class="box-header">
+                            <div class="box-no">
+                                3
+                            </div>
+                            <div class="box-title">
+                                Patient Directive # 3
+                            </div>
+                            <div class="add-fav">
+                                <i class="fa fa-heart-o"></i>
+                            </div>
+                        </div>
+                        <div class="box-statue">
+                            <span>Status</span>
+                            <span class="status-label">active</span>
+                        </div>
+                        <div class="box-disc">
+                            <p>An advance directive is a statement made by a competent person, directing his or her medical care</p>
+                        </div>
+                        <div class="disclaimer">
+                            <strong>Disclaimer:</strong>
+                            <p>This Document may not be the latest one.</p>
+                        </div>
+                        <div class="box-statue">
+                            <span>Type:</span>
+                            <span class="type-label">PDF</span>
+                        </div>
+                        <button class="detail-btn"> View Details</button>
+                    </div>
+                    <div class="box-tile">
+                        <div class="box-header">
+                            <div class="box-no">
+                                4
+                            </div>
+                            <div class="box-title">
+                                Patient Directive # 4
+                            </div>
+                            <div class="add-fav">
+                                <i class="fa fa-heart-o"></i>
+                            </div>
+                        </div>
+                        <div class="box-statue">
+                            <span>Status</span>
+                            <span class="status-label">active</span>
+                        </div>
+                        <div class="box-disc">
+                            <p>An advance directive is a statement made by a competent person, directing his or her medical care</p>
+                        </div>
+                        <div class="disclaimer">
+                            <strong>Disclaimer:</strong>
+                            <p>This Document may not be the latest one.</p>
+                        </div>
+                        <div class="box-statue">
+                            <span>Type:</span>
+                            <span class="type-label">PDF</span>
+                        </div>
+                        <button class="detail-btn"> View Details</button>
+                    </div>
+                </div>
+
+
+                <div class="header-section3">
+                    <div class="panel">
+                        <h4>Patient Information:</h4>
+                        <pre id="info">Loading...</pre>
+                    </div>
+                    <div class="panel">
+                        <h4>Encounter Information:</h4>
+                        <pre id="encounterInfo">Loading...</pre>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-right">
+                EHR Sidebar
+            </div>
         </div>
-
-        <div class="header-section2">
-            <h2 id="patient_header"> Patient Details</h2>
-            <div class="row">
-                <div class="col3">
-                    <div>Name: <span id="patientS"></span></div>
-
-                </div>
-                <div class="col3">
-                    <div>Qualification/CID: <span id="qlS"></span></div>
-                </div>
-                <div class="col3">
-                    <div>DOB: <span id="dobS"></span></div>
-                </div>
-                <div class="col3">
-                    <div>Gender: <span id="genderS"></span></div>
-                </div>
-            </div>     
-
-        </div>
-
-        <div class="header-section3">
-            <h4>Patient Information:</h4>
-            <pre id="info">Loading...</pre>
-        </div>
-
 
     </div>
 
 
     <script type="text/javascript">
 
+if (!library)
+   var library = {};
+
+library.json = {
+   replacer: function(match, pIndent, pKey, pVal, pEnd) {
+      var key = '<span class=json-key>';
+      var val = '<span class=json-value>';
+      var str = '<span class=json-string>';
+      var r = pIndent || '';
+      if (pKey)
+         r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
+      if (pVal)
+         r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
+      return r + (pEnd || '');
+      },
+   prettyPrint: function(obj) {
+      var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
+      return JSON.stringify(obj, null, 3)
+         .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
+         .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+         .replace(jsonLine, library.json.replacer);
+      }
+   };
+
         function getExtensionValue(pt, reqVal) {
             for (var i = 0; i < pt.extension.length; i++) {
                 console.log(pt.extension[i].url);
-                if (pt.extension[i].url !=null && pt.extension[i].url == reqVal) {
-                    if (pt.extension[i].extension[0].valueCoding!=null){
-                    return pt.extension[i].extension[0].valueCoding.display;
-                    }else {
+                if (pt.extension[i].url != null && pt.extension[i].url == reqVal) {
+                    if (pt.extension[i].extension[0].valueCoding != null) {
+                        return pt.extension[i].extension[0].valueCoding.display;
+                    } else {
                         return pt.extension[i].extension[0].valueString;
                     }
                 }
@@ -68,43 +239,46 @@
             return 'N/A'
         }
 
-        
+
         // Request current logged in Patient Data using fhir-client library and updates DOM on successful response
 
         FHIR.oauth2.ready().then(async (client) => {
-            console.log('Try loading data....');
+            console.log('loading data....');
             console.log(client);
             console.log(client.state.tokenResponse.access_token);
-            //return client.patient.read()
-            return client.request(client.user.fhirUser)
+            
+            client.request(client.user.fhirUser).then((obj)=>{
+                console.log('FHIR User loading...s');
+                console.log(obj);
+                $('#practID').html(obj.name[0].text || obj.name[0].family);
+                $('#practTel').html(obj.telecom[0].value || obj.telecom[0].use)
+            })
+
+            client.encounter.read().then(function (encounterObj) {
+                console.log('Encounter::'+encounterObj);
+                $('#encounterInfo').html(library.json.prettyPrint(encounterObj));
+            });
+            return client.patient.read()
+
 
         }).then(
-
             function (pt) {
-                console.log('Client Req data is::');
+                console.log('pt is::');
                 console.log(pt);
-                document.getElementById('patient_header').innerText = (pt.name[0].prefix || '') + pt.name[0].given.join(' ') + ' ' + pt.name[0].family;
+                //document.getElementById('patient_header').innerText = (pt.name[0].prefix || '') + pt.name[0].given.join(' ') + ' ' + pt.name[0].family;
 
                 document.getElementById('patientS').innerText = (pt.name[0].text || pt.name[0].given);
-                //document.getElementById('qlS').innerText = pt.qualification[0].code.text || 'N/A';
-                document.getElementById('dobS').innerText = pt.birthDate || 'N/A';
-
+                document.getElementById('ethnicityS').innerText = getExtensionValue(pt, 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity');
+                document.getElementById('cidS').innerText = pt.identifier[0].id;
+                document.getElementById('raceS').innerText = getExtensionValue(pt, 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-race');
+                document.getElementById('dobS').innerText = pt.birthDate;
+                document.getElementById('addressS').innerText = pt.address[0].line[0];
                 document.getElementById('genderS').innerText = pt.gender;
-                //document.getElementById('phoneS').innerText = pt.telecom[0].value || 'N/A';
+                document.getElementById('phoneS').innerText = pt.telecom[0].value || 'N/A';
 
-                document.getElementById('info').innerText = JSON.stringify(pt, null, '\t')
+                //document.getElementById('info').innerText = JSON.stringify(pt, null, '\t');
+                $('#info').html(library.json.prettyPrint(pt));
 
-            //     const clientPublic = new FHIR.client({
-            //         serverUrl: "http://10.24.0.14/R4",
-            //     tokenResponse: {
-            //         access_token: "myToken"
-            //     }
-            // });
-            //     console.log('public client');
-            //     console.log(clientPublic);
-            //     var metaRes= clientPublic.request("metadata");
-            //     console.log(metaRes);
-                
             },
 
             function (error) {
