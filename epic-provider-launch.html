@@ -15,7 +15,7 @@
         //scope: "patient/*.* user/*.* encounter.read openid fhirUser launch launch/patient",
 
         //scope: "openid fhirUser profile user/*.read patient/*.* launch launch/patient", //IMP:: Prompht to select patient 
-        scope: "openid fhirUser profile user/*.read patient/*.* launch", // Do not prompht to select patient 
+        scope: "openid fhirUser profile user/*.read patient/*.*", // Do not prompht to select patient 
 
         //-----------------------------CERNER---------------------------------------
         //clientId: "ddcff9b7-f9dc-4f56-80b5-244f98cb3b7e", //CERNER Provider
@@ -28,7 +28,7 @@
         //scope: "openid launch/patient patient/*.read offline_access",
         //scope: "patient/*.* user/*.* openid fhirUser launch launch/patient",
         // (Optional) many servers are capable of using index.html by default
-        redirectUri: 'https://itissismail.github.io/epic-provider-index.html',
+        redirectUri: 'epic-provider-index.html',
     });
 </script>
 </body>
