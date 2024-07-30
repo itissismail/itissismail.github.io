@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>SMART: Patient App</title>
+    <title>Cerner Provider App</title>
     <script src="https://cdn.jsdelivr.net/npm/fhirclient/build/fhir-client.js"></script>
 </head>
 <body>
@@ -14,7 +14,7 @@
         //scope: "patient/*.* user/*.* openid fhirUser launch launch/patient",
         //--------------------------------------------------------------------
         clientId: "ddcff9b7-f9dc-4f56-80b5-244f98cb3b7e", //CERNER Provider
-        scope: "patient/Patient.read patient/Observation.read openid fhirUser",
+        scope: "user/Practitioner.read patient/Patient.read patient/Observation.read patient/Encounter.read openid fhirUser",
         //--------------------------------------------------------------------
         //clientId: "46a7f250-3972-4256-affe-ff13d9d35336", //CERNER Patient
         //scope: "patient/Patient.read patient/Immunization.read launch/patient online_access openid profile fhirUser",
