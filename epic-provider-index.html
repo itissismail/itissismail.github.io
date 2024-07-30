@@ -72,7 +72,9 @@
                             </div>
                         </div>
                         <div class="box-statue">
-                            <span>Status</span>
+
+                            <span>AdVault</span>
+
                             <span class="status-label">active</span>
                         </div>
                         <div class="box-disc">
@@ -102,7 +104,8 @@
                             </div>
                         </div>
                         <div class="box-statue">
-                            <span>Status</span>
+                            <span>Emolst</span>
+
                             <span class="status-label">active</span>
                         </div>
                         <div class="box-disc">
@@ -132,7 +135,9 @@
                             </div>
                         </div>
                         <div class="box-statue">
-                            <span>Status</span>
+
+                            <span>Emolst</span>
+
                             <span class="status-label">active</span>
                         </div>
                         <div class="box-disc">
@@ -161,8 +166,10 @@
                             </div>
                         </div>
                         <div class="box-statue">
-                            <span>Status</span>
-                            <span class="status-label">active</span>
+
+                            <span>DAP</span>
+                            <span class="status-label">inactive</span>
+
                         </div>
                         <div class="box-disc">
                             <p>An advance directive is a statement made by a competent person, directing his or her medical care</p>
@@ -254,7 +261,9 @@ library.json = {
                 $('#practTel').html(obj.telecom[0].value || obj.telecom[0].use)
             })
 
-            client.encounter.read().then(function (encounterObj) {
+            //client.encounter.read().then(function (encounterObj) {
+            client.request("Encounter?subject=Patient/"+client.patient.id).then(function (encounterObj){
+
                 console.log('Encounter::'+encounterObj);
                 $('#encounterInfo').html(library.json.prettyPrint(encounterObj));
             });
@@ -272,18 +281,33 @@ library.json = {
                 document.getElementById('cidS').innerText = pt.identifier[0].id;
                 document.getElementById('raceS').innerText = getExtensionValue(pt, 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-race');
                 document.getElementById('dobS').innerText = pt.birthDate;
-                document.getElementById('addressS').innerText = pt.address[0].line[0];
+
+                document.getElementById('addressS').innerText = pt.address[0].line[0] || 'N/A';
+
                 document.getElementById('genderS').innerText = pt.gender;
                 document.getElementById('phoneS').innerText = pt.telecom[0].value || 'N/A';
 
                 //document.getElementById('info').innerText = JSON.stringify(pt, null, '\t');
                 $('#info').html(library.json.prettyPrint(pt));
 
+
+                            //     const clientPublic = new FHIR.client({
+            //         serverUrl: "http://10.xx.0.xx/R4",
+            //     tokenResponse: {
+            //         access_token: "myToken"
+            //     }
+            // });
+            //     console.log('public client');
+            //     console.log(clientPublic);
+            //     var metaRes= clientPublic.request("metadata");
+            //     console.log(metaRes);
+
+
             },
 
             function (error) {
 
-                document.getElementById('patient_header').innerText = 'Error Occurred'
+                //document.getElementById('patient_header').innerText = 'Error Occurred'
 
                 document.getElementById('info').innerText = error.stack
 
