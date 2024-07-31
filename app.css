@@ -450,3 +450,15 @@ button.detail-btn {
   font-weight: 500;
   height: 44px;
 }
+
+.disclaimerHead {
+  background: yellow;
+  text-align: center;
+  border-radius: 8px;
+  padding: 8px;
+  color: #191D23;
+}
+
+.disclaimerHead h3{
+font-weight: 400;
+}
