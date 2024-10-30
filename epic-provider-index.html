@@ -15,8 +15,10 @@
     <link rel="stylesheet" type="text/css" href="./app.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Gothic+Coding&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Gothic+Coding&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -27,12 +29,17 @@
                 EHR Sidebar
             </div>
             <div class="body-wrapper">
+
                 <div class="disclaimerHead"><h3><b>Disclaimer:</b> These documents might not be latest</h3></div>
+
                 <div class="ehr-header">
                     <h3 style="color: #3c763d;">Simulated EHR:: EPIC</h3>
-                    <div style="text-align: right;"><i class="fa fa-user user"></i>&nbsp; Provider: <b style="color: #0053a1;" id="practID"></b><p id="practTel"></p></div>
+                    <div style="text-align: right;"><i class="fa fa-user user"></i>&nbsp; Provider: <b
+                            style="color: #0053a1;" id="practID"></b>
+                        <p id="practTel"></p>
+                    </div>
                 </div>
-                
+
                 <div class="header-section2">
                     <!-- <h2 id="patient_header"> Patient Details</h2> -->
                     <div class="row">
@@ -79,7 +86,8 @@
                             <span class="status-label">active</span>
                         </div>
                         <div class="box-disc">
-                            <p>An advance directive is a statement made by a competent person, directing his or her medical care</p>
+                            <p>An advance directive is a statement made by a competent person, directing his or her
+                                medical care</p>
                         </div>
                         <div class="disclaimer">
                             <strong>Disclaimer:</strong>
@@ -90,7 +98,7 @@
                             <span class="type-label">DNR</span>
                         </div>
                         <button class="detail-btn"> View Details</button>
-                    </div>  
+                    </div>
 
                     <div class="box-tile">
                         <div class="box-header">
@@ -110,7 +118,8 @@
                             <span class="status-label">active</span>
                         </div>
                         <div class="box-disc">
-                            <p>An advance directive is a statement made by a competent person, directing his or her medical care</p>
+                            <p>An advance directive is a statement made by a competent person, directing his or her
+                                medical care</p>
                         </div>
                         <div class="disclaimer">
                             <strong>Disclaimer:</strong>
@@ -142,7 +151,8 @@
                             <span class="status-label">active</span>
                         </div>
                         <div class="box-disc">
-                            <p>An advance directive is a statement made by a competent person, directing his or her medical care</p>
+                            <p>An advance directive is a statement made by a competent person, directing his or her
+                                medical care</p>
                         </div>
                         <div class="disclaimer">
                             <strong>Disclaimer:</strong>
@@ -173,7 +183,8 @@
 
                         </div>
                         <div class="box-disc">
-                            <p>An advance directive is a statement made by a competent person, directing his or her medical care</p>
+                            <p>An advance directive is a statement made by a competent person, directing his or her
+                                medical care</p>
                         </div>
                         <div class="disclaimer">
                             <strong>Disclaimer:</strong>
@@ -209,29 +220,29 @@
 
     <script type="text/javascript">
 
-if (!library)
-   var library = {};
+        if (!library)
+            var library = {};
 
-library.json = {
-   replacer: function(match, pIndent, pKey, pVal, pEnd) {
-      var key = '<span class=json-key>';
-      var val = '<span class=json-value>';
-      var str = '<span class=json-string>';
-      var r = pIndent || '';
-      if (pKey)
-         r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
-      if (pVal)
-         r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
-      return r + (pEnd || '');
-      },
-   prettyPrint: function(obj) {
-      var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
-      return JSON.stringify(obj, null, 3)
-         .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
-         .replace(/</g, '&lt;').replace(/>/g, '&gt;')
-         .replace(jsonLine, library.json.replacer);
-      }
-   };
+        library.json = {
+            replacer: function (match, pIndent, pKey, pVal, pEnd) {
+                var key = '<span class=json-key>';
+                var val = '<span class=json-value>';
+                var str = '<span class=json-string>';
+                var r = pIndent || '';
+                if (pKey)
+                    r = r + key + pKey.replace(/[": ]/g, '') + '</span>: ';
+                if (pVal)
+                    r = r + (pVal[0] == '"' ? str : val) + pVal + '</span>';
+                return r + (pEnd || '');
+            },
+            prettyPrint: function (obj) {
+                var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
+                return JSON.stringify(obj, null, 3)
+                    .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
+                    .replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                    .replace(jsonLine, library.json.replacer);
+            }
+        };
 
         function getExtensionValue(pt, reqVal) {
             for (var i = 0; i < pt.extension.length; i++) {
@@ -254,8 +265,8 @@ library.json = {
             console.log('loading data....');
             console.log(client);
             console.log(client.state.tokenResponse.access_token);
-            
-            client.request(client.user.fhirUser).then((obj)=>{
+
+            client.request(client.user.fhirUser).then((obj) => {
                 console.log('FHIR User loading...s');
                 console.log(obj);
                 $('#practID').html(obj.name[0].text || obj.name[0].family);
@@ -263,9 +274,9 @@ library.json = {
             })
 
             //client.encounter.read().then(function (encounterObj) {
-            client.request("Encounter?subject=Patient/"+client.patient.id).then(function (encounterObj){
+            client.request("Encounter?subject=Patient/" + client.patient.id).then(function (encounterObj) {
 
-                console.log('Encounter::'+encounterObj);
+                console.log('Encounter::' + encounterObj);
                 $('#encounterInfo').html(library.json.prettyPrint(encounterObj));
             });
             return client.patient.read()
@@ -292,6 +303,7 @@ library.json = {
                 $('#info').html(library.json.prettyPrint(pt));
 
 
+
                             //     const clientPublic = new FHIR.client({
             //         serverUrl: "http://10.xx.0.xx/R4",
             //     tokenResponse: {
@@ -302,6 +314,7 @@ library.json = {
             //     console.log(clientPublic);
             //     var metaRes= clientPublic.request("/$patient-AdvanceDirective");
             //     console.log(metaRes);
+
 
 
             },
