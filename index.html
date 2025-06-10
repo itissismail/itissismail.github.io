@@ -24,10 +24,57 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
-      background: url('https://www.transparenttextures.com/patterns/cubes.png') repeat;
-      background-color: #e6f0f7;
+      margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #e6f0f7;
+      overflow-x: hidden;
     }
+
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .floating-object {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      opacity: 0.2;
+      background-color: #90caf9;
+      animation: moveLoop 30s linear infinite;
+    }
+
+    .floating-object:nth-child(1) {
+      top: 10%; left: 5%; animation-delay: 0s;
+    }
+    .floating-object:nth-child(2) {
+      top: 50%; left: 80%; animation-delay: 5s;
+    }
+    .floating-object:nth-child(3) {
+      top: 70%; left: 20%; animation-delay: 10s;
+    }
+    .floating-object:nth-child(4) {
+      top: 30%; left: 60%; animation-delay: 15s;
+    }
+    .floating-object:nth-child(5) {
+      top: 80%; left: 40%; animation-delay: 20s;
+    }
+
+    @keyframes moveLoop {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(40px, -30px) rotate(90deg); }
+      50% { transform: translate(-20px, -60px) rotate(180deg); }
+      75% { transform: translate(-40px, 0px) rotate(270deg); }
+      100% { transform: translate(0, 0) rotate(360deg); }
+    }
+
     .container {
       max-width: 900px;
       margin-top: 40px;
@@ -35,21 +82,22 @@
       padding: 40px;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      position: relative;
+      z-index: 1;
     }
+
     .app-link {
       margin: 10px;
       display: inline-flex;
       align-items: center;
       gap: 10px;
     }
-    .divider {
-      margin: 0 10px;
-      color: #888;
-    }
+
     .logo {
       width: 160px;
       margin-bottom: 20px;
     }
+
     .disclaimer {
       font-size: 0.9rem;
       background-color: #fff3cd;
@@ -58,9 +106,11 @@
       border: 1px solid #ffeeba;
       border-radius: 5px;
     }
+
     .brand-title {
       color: #004a99;
     }
+
     .btn i {
       margin-right: 6px;
     }
@@ -68,12 +118,20 @@
 </head>
 
 <body>
+  <div class="animated-bg">
+    <div class="floating-object"></div>
+    <div class="floating-object"></div>
+    <div class="floating-object"></div>
+    <div class="floating-object"></div>
+    <div class="floating-object"></div>
+  </div>
+
   <div class="container text-center">
     <div class="disclaimer mb-4">
       <strong>Disclaimer:</strong> This is a sample project that shows the workflow of different app types in SMART on FHIR. It does not follow standard or best-practice code standards. Use this project only as a reference to understand SMART on FHIR concepts.
     </div>
 
-    <h1 class="mb-2 brand-title">Doc Health</h1>
+    <h1 class="mb-2 brand-title">IQG - HEL Doc Health</h1>
     <h4 class="mb-4">SMART on FHIR App Launches</h4>
     <img src="images/tell health logo.jpg" alt="HEL DOC Health Logo" class="logo">
 
@@ -116,3 +174,4 @@
 </body>
 
 </html>
+
