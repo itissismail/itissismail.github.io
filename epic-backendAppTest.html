@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>EPIC SMART on FHIR Backend Test Client</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    textarea, input { width: 100%; padding: 10px; margin-top: 10px; font-family: monospace; }
+    button { padding: 10px 20px; margin-top: 10px; }
+    pre { background: #f3f3f3; padding: 10px; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; overflow: scroll; height: 300px; }
+  </style>
+</head>
+<body>
+
+  <h2>Get Patient Details</h2>
+  <input type="text" id="patientId" placeholder="Enter Patient ID (e.g., e8cL5OXKANxo9J7NHjhznXw3)" />
+  <button onclick="fetchPatient()">Fetch Patient</button>
+  <pre id="patientResult"></pre>
+
+  <h2>Post Condition Resource</h2>
+  <textarea id="conditionInput" rows="10" placeholder='Paste Condition Resource JSON here'></textarea>
+  <button onclick="postCondition()">Submit</button>
+  <pre id="conditionResult"></pre>
+
+  <script>
+    const BASE_URL = "http://localhost:8000"; // change to your backend URL if deployed
+
+    async function fetchPatient() {
+      const id = document.getElementById("patientId").value;
+      if (!id) {
+        alert("Please enter a Patient ID.");
+        return;
+      }
+      const resBox = document.getElementById("patientResult");
+      resBox.textContent = "Loading...";
+      try {
+        console.log('Fetch Patient '+id);
+        const response = await fetch(`${BASE_URL}/patient/${id}`);
+        console.log(response);
+        const data = await response.json();
+        resBox.textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        resBox.textContent = `Error: ${error}`;
+      }
+    }
+
+    async function postCondition() {
+      const input = document.getElementById("conditionInput").value;
+      const resBox = document.getElementById("conditionResult");
+      resBox.textContent = "Submitting...";
+      try {
+        const jsonData = JSON.parse(input);
+        const response = await fetch(`${BASE_URL}/condition`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(jsonData)
+        });
+        const result = await response.json();
+        resBox.textContent = JSON.stringify(result, null, 2);
+      } catch (error) {
+        resBox.textContent = `Error: ${error}`;
+      }
+    }
+  </script>
+
+</body>
+</html>
