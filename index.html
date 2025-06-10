@@ -1,61 +1,118 @@
-<!DOCTYPE html>
+  <!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <title>Old Page</title>
-    <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="3; URL=http://iqg-cerner-app.s3-website.us-east-2.amazonaws.com/?iss=https://fhir-ehr-code.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d&launch=a6420485-e2bc-4a33-bfe7-b2f0770ce0b1
-    " />
-</head>
-<body>
+ <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="3; URL=http://iqg-cerner-app.s3-website.us-east-2.amazonaws.com/?iss=https://fhir-ehr-code.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d&launch=a6420485-e2bc-4a33-bfe7-b2f0770ce0b1" />
+
+ <body>
   <p>This page has been moved. If you are not redirected within 3 seconds, click <a href="http://iqg-cerner-app.s3-website.us-east-2.amazonaws.com/?iss=https://fhir-ehr-code.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d&launch=a6420485-e2bc-4a33-bfe7-b2f0770ce0b1
     ">here</a> to go to the smart app homepage.</p>
-</body>
+</body> -->
 
-<!-- <head>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cerner Sandbox App</title>
-  <link rel="stylesheet" type="text/css" href="./app.css" />
-
-
+  <title>SMART on FHIR - App Workflows</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      background: url('https://www.transparenttextures.com/patterns/cubes.png') repeat;
+      background-color: #e6f0f7;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .container {
+      max-width: 900px;
+      margin-top: 40px;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .app-link {
+      margin: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .divider {
+      margin: 0 10px;
+      color: #888;
+    }
+    .logo {
+      width: 160px;
+      margin-bottom: 20px;
+    }
+    .disclaimer {
+      font-size: 0.9rem;
+      background-color: #fff3cd;
+      color: #856404;
+      padding: 15px;
+      border: 1px solid #ffeeba;
+      border-radius: 5px;
+    }
+    .brand-title {
+      color: #004a99;
+    }
+    .btn i {
+      margin-right: 6px;
+    }
+  </style>
 </head>
 
-<body style="background-color: #005f80">
-  <div class="child">
-    <h1>SMART</h1>
-    <h2>HELDoc-Health</h2>
-    <img src="images/tell health logo.jpg" id="login_image" alt="HElLDOC Health Inc." />
-    <div style="display: flex;">
-      <a target="_blank" title="wilmasmart/Cerner01"
-        href="/cerner-patient-launch.html?iss=https://fhir-myrecord.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d"
-        class="login_links">Cerner Patient App</a><span class="login_links">|</span>
-      <a target="_blank" title="portal/portal"
-        href="/cerner-provider-launch.html?iss=https://fhir-ehr-code.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d&launch=a41588b4-d3b6-47f2-9357-efada0c2fd49"
-        class="login_links">Cerner Provider App(EHR)</a>
+<body>
+  <div class="container text-center">
+    <div class="disclaimer mb-4">
+      <strong>Disclaimer:</strong> This is a sample project that shows the workflow of different app types in SMART on FHIR. It does not follow standard or best-practice code standards. Use this project only as a reference to understand SMART on FHIR concepts.
     </div>
 
-    <div style="display: flex;">
-      <a target="_blank"
-        href="/smartHealthLaunch.html?iss=https%3A%2F%2Flaunch.smarthealthit.org%2Fv%2Fr4%2Ffhir&launch=WzEsIjY3Y2JmMDkwLTRkZGItNDc5OS05OWZmLWEyOGFiZTI3NDBiMSIsIiIsIk1BTlVBTCIsMCwwLDAsIiIsIiIsIiIsIiIsInJlcXVlc3RfaW52YWxpZF90b2tlbiIsIiIsIiIsMCwxXQ"
-        class="login_links">SmartHealthIT Patient App</a><span class="login_links">|</span>
-      <a target="_blank"
-        href="/smartHealthLaunch.html?iss=https://launch.smarthealthit.org/v/r4/fhir&launch=WzAsIjY3Y2JmMDkwLTRkZGItNDc5OS05OWZmLWEyOGFiZTI3NDBiMSIsIiIsIk1BTlVBTCIsMSwxLDAsIiIsIiIsIiIsIiIsInJlcXVlc3RfaW52YWxpZF90b2tlbiIsIiIsIiIsMCwxXQ"
-        class="login_links">SmartHealthIT Provider App</a>
+    <h1 class="mb-2 brand-title">Doc Health</h1>
+    <h4 class="mb-4">SMART on FHIR App Launches</h4>
+    <img src="images/tell health logo.jpg" alt="HEL DOC Health Logo" class="logo">
+
+    <div class="mb-3">
+      <a target="_blank" href="/cerner-patient-launch.html?iss=https://fhir-myrecord.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d" class="btn btn-outline-primary app-link">
+        <i class="fas fa-user-injured"></i> Cerner Patient App
+      </a>
+      <a target="_blank" href="/cerner-provider-launch.html?iss=https://fhir-ehr-code.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d&launch=a41588b4-d3b6-47f2-9357-efada0c2fd49" class="btn btn-outline-primary app-link">
+        <i class="fas fa-user-md"></i> Cerner Provider App
+      </a>
     </div>
 
-    <div style="display: flex;">
-      <a target="_blank" title="fhircamila/epicepic1"
-        href="/epic-patient-launch.html?iss=https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4"
-        class="login_links">EPIC Patient App</a> <span class="login_links">|</span>
-      <a target="_blank" title="FHIRTWO/EpicFhir11!"
-        href="/epic-provider-launch.html?iss=https%3A%2F%2Ffhir.epic.com%2Finterconnect-fhir-oauth%2Fapi%2FFHIR%2FR4"
-        class="login_links">EPIC Provider App(StandAlone)</a>
+    <div class="mb-3">
+      <a target="_blank" href="/smartHealthLaunch.html?iss=https%3A%2F%2Flaunch.smarthealthit.org%2Fv%2Fr4%2Ffhir&launch=WzEsIjY3Y2JmMDkwLTRkZGItNDc5OS05OWZmLWEyOGFiZTI3NDBiMSIsIiIsIk1BTlVBTCIsMCwwLDAsIiIsIiIsIiIsIiIsInJlcXVlc3RfaW52YWxpZF90b2tlbiIsIiIsIiIsMCwxXQ" class="btn btn-outline-success app-link">
+        <i class="fas fa-user-injured"></i> SmartHealthIT Patient App
+      </a>
+      <a target="_blank" href="/smartHealthLaunch.html?iss=https://launch.smarthealthit.org/v/r4/fhir&launch=WzAsIjY3Y2JmMDkwLTRkZGItNDc5OS05OWZmLWEyOGFiZTI3NDBiMSIsIiIsIk1BTlVBTCIsMSwxLDAsIiIsIiIsIiIsIiIsInJlcXVlc3RfaW52YWxpZF90b2tlbiIsIiIsIiIsMCwxXQ" class="btn btn-outline-success app-link">
+        <i class="fas fa-user-md"></i> SmartHealthIT Provider App
+      </a>
     </div>
 
+    <div class="mb-3">
+      <a target="_blank" href="/epic-patient-launch.html?iss=https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4" class="btn btn-outline-dark app-link">
+        <i class="fas fa-user-injured"></i> EPIC Patient App
+      </a>
+      <a target="_blank" href="/epic-provider-launch.html?iss=https%3A%2F%2Ffhir.epic.com%2Finterconnect-fhir-oauth%2Fapi%2FFHIR%2FR4" class="btn btn-outline-dark app-link">
+        <i class="fas fa-user-md"></i> EPIC Provider App
+      </a>
+    </div>
+
+    <div class="mb-3">
+      <a target="_blank" href="/epic-backend.html" class="btn btn-outline-warning app-link">
+        <i class="fas fa-server"></i> EPIC Backend (Lookup)
+      </a>
+      <a target="_blank" href="/epic-backendAppTest.html" class="btn btn-outline-warning app-link">
+        <i class="fas fa-database"></i> EPIC Backend Post
+      </a>
+    </div>
   </div>
-</body> -->
-
+</body>
 
 </html>
