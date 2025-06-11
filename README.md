@@ -13,3 +13,5 @@ Provider Smart on the FHIR app with EHR Launch. Sample app with EPIC and Cerner 
 * npm start
 * Open http://localhost:9201
 ```
+
+![Alt text](./rdimg.jpeg)
