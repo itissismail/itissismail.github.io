@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>EPIC SMART on FHIR Backend Test Client</title>
+
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
@@ -62,34 +63,41 @@
       const id = document.getElementById("patientId").value;
       const loader = document.getElementById("loader1");
       const resBox = document.getElementById("patientResult");
+
       if (!id) {
         alert("Please enter a Patient ID.");
         return;
       }
+
       loader.style.display = "inline-block";
       resBox.textContent = "Loading...";
       try {
         const response = await fetch(`${BASE_URL}/patient/${id}`);
+
         const data = await response.json();
         resBox.textContent = JSON.stringify(data, null, 2);
       } catch (error) {
         resBox.textContent = `Error: ${error}`;
       } finally {
         loader.style.display = "none";
+
       }
     }
 
     async function postCondition() {
       const input = document.getElementById("conditionInput").value;
+
       const loader = document.getElementById("loader2");
       const resBox = document.getElementById("conditionResult");
       loader.style.display = "inline-block";
+
       resBox.textContent = "Submitting...";
       try {
         const jsonData = JSON.parse(input);
         const response = await fetch(`${BASE_URL}/condition`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+
           body: JSON.stringify(jsonData)
         });
         const result = await response.json();
