@@ -3,67 +3,111 @@
 <head>
   <meta charset="UTF-8" />
   <title>EPIC SMART on FHIR Backend Test Client</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; }
-    textarea, input { width: 100%; padding: 10px; margin-top: 10px; font-family: monospace; }
-    button { padding: 10px 20px; margin-top: 10px; }
-    pre { background: #f3f3f3; padding: 10px; border-radius: 5px; white-space: pre-wrap; word-wrap: break-word; overflow: scroll; height: 300px; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+    }
+    textarea, input {
+      width: 100%;
+      font-family: monospace;
+    }
+    .section {
+      margin-bottom: 2rem;
+    }
+    .spinner-border {
+      display: none;
+    }
+    pre {
+      background: #f1f3f5;
+      padding: 1rem;
+      border-radius: 6px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h2 class="text-primary mb-4">SMART on FHIR Backend App Test Client</h2>
 
-  <h2>Get Patient Details</h2>
-  <input type="text" id="patientId" placeholder="Enter Patient ID (e.g., e8cL5OXKANxo9J7NHjhznXw3)" />
-  <button onclick="fetchPatient()">Fetch Patient</button>
-  <pre id="patientResult"></pre>
+    <div class="section">
+      <h5>🔍 Get Patient Details</h5>
+      <input type="text" class="form-control" id="patientId" placeholder="Enter Patient ID (e.g., e8cL5OXKANxo9J7NHjhznXw3)" />
+      <button class="btn btn-success mt-2" onclick="fetchPatient()">Fetch Patient</button>
+      <div id="loader1" class="spinner-border text-primary mt-3" role="status"></div>
+      <pre id="patientResult" class="mt-2">Awaiting input...</pre>
+    </div>
 
-  <h2>Post Condition Resource</h2>
-  <textarea id="conditionInput" rows="10" placeholder='Paste Condition Resource JSON here'></textarea>
-  <button onclick="postCondition()">Submit</button>
-  <pre id="conditionResult"></pre>
+    <div class="section">
+      <h5>📝 Post Condition Resource</h5>
+      <textarea id="conditionInput" class="form-control" rows="10" placeholder='Paste Condition Resource JSON here'></textarea>
+      <button class="btn btn-warning mt-2" onclick="postCondition()">Submit</button>
+      <div id="loader2" class="spinner-border text-warning mt-3" role="status"></div>
+      <pre id="conditionResult" class="mt-2">Awaiting input...</pre>
+    </div>
+  </div>
 
   <script>
-    const BASE_URL = "http://localhost:8000"; // change to your backend URL if deployed
+    const BASE_URL = "http://localhost:8000";
 
     async function fetchPatient() {
       const id = document.getElementById("patientId").value;
+      const loader = document.getElementById("loader1");
+      const resBox = document.getElementById("patientResult");
+
       if (!id) {
         alert("Please enter a Patient ID.");
         return;
       }
-      const resBox = document.getElementById("patientResult");
+
+      loader.style.display = "inline-block";
       resBox.textContent = "Loading...";
       try {
-        console.log('Fetch Patient '+id);
         const response = await fetch(`${BASE_URL}/patient/${id}`);
-        console.log(response);
+
         const data = await response.json();
         resBox.textContent = JSON.stringify(data, null, 2);
       } catch (error) {
         resBox.textContent = `Error: ${error}`;
+      } finally {
+        loader.style.display = "none";
+
       }
     }
 
     async function postCondition() {
       const input = document.getElementById("conditionInput").value;
+
+      const loader = document.getElementById("loader2");
       const resBox = document.getElementById("conditionResult");
+      loader.style.display = "inline-block";
+
       resBox.textContent = "Submitting...";
       try {
         const jsonData = JSON.parse(input);
         const response = await fetch(`${BASE_URL}/condition`, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
+
           body: JSON.stringify(jsonData)
         });
         const result = await response.json();
         resBox.textContent = JSON.stringify(result, null, 2);
       } catch (error) {
         resBox.textContent = `Error: ${error}`;
+      } finally {
+        loader.style.display = "none";
       }
     }
   </script>
-
 </body>
 </html>

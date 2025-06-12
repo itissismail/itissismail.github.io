@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>EPIC SMART on FHIR Backend App</title>
+
+  <meta charset="UTF-8" />
+  <title>EPIC SMART on FHIR Backend App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: #f5f9fc;
+      padding: 2rem;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+    .card {
+      margin-top: 20px;
+    }
+    #loader {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <h1>SMART on FHIR Backend App</h1>
-    <button onclick="fetchPatient()">Fetch Patient</button>
-    <pre id="output">Click the button to begin...</pre>
+  <div class="container">
+    <h1 class="text-primary mb-4">SMART on FHIR Backend App</h1>
+    <button id="fetchBtn" class="btn btn-success mb-3">🔄 Fetch Patient</button>
+    <div id="loader" class="text-center my-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p class="mt-2">Fetching patient data...</p>
+    </div>
+    <pre id="output" class="card p-3 bg-light border">Click the button to begin...</pre>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/jsrsasign"></script>
-    <script>
-        const clientId = "5a173eef-46a0-4d11-972a-6f5727bc22c4";
-        const tokenEndpoint = "https://fhir.epic.com/interconnect-fhir-oauth/oauth2/token"; // Replace with actual
-        const fhirBaseUrl = "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4"; // Replace with actual
-        const patientId = "e8cL5OXKANxo9J7NHjhznXw3"; // Replace with actual
+  <script src="https://cdn.jsdelivr.net/npm/jsrsasign"></script>
+  <script>
+    const clientId = "5a173eef-46a0-4d11-972a-6f5727bc22c4";
+    const tokenEndpoint = "https://fhir.epic.com/interconnect-fhir-oauth/oauth2/token";
+    const fhirBaseUrl = "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4";
+    const patientId = "e8cL5OXKANxo9J7NHjhznXw3";
 
         // Sample private key in PEM format (For demo only. Do NOT expose real private keys on frontend!)
         const privateKey = `----------BEGIN PRIVATE KEY-----
@@ -46,56 +74,58 @@ yRqc1rePwBqsj9RVL+MuoC8UOwje+Z6kJ0w/C3jXx5DD0qQjglSvGKslNXPT0OOp
 nE5Rc42tBuAwJ/6AgegM6BQ=
 -----END PRIVATE KEY-----`;
 
-        async function fetchPatient() {
-            const now = Math.floor(Date.now() / 1000);
-            const payload = {
-                iss: clientId,
-                sub: clientId,
-                aud: tokenEndpoint,
-                exp: now + 300,
-                iat: now,
-                jti: Math.random().toString(36).substring(2)
-            };
 
-            const header = {
-                alg: "RS384",
-                typ: "JWT"
-            };
+    async function fetchPatient() {
+      const output = document.getElementById("output");
+      const loader = document.getElementById("loader");
+      output.style.display = "none";
+      loader.style.display = "block";
 
-            const sHeader = JSON.stringify(header);
-            const sPayload = JSON.stringify(payload);
-            const jwt = KJUR.jws.JWS.sign("RS384", sHeader, sPayload, privateKey);
+      try {
+        const now = Math.floor(Date.now() / 1000);
+        const payload = {
+          iss: clientId,
+          sub: clientId,
+          aud: tokenEndpoint,
+          exp: now + 300,
+          iat: now,
+          jti: Math.random().toString(36).substring(2)
+        };
+        const header = { alg: "RS384", typ: "JWT" };
+        const jwt = KJUR.jws.JWS.sign("RS384", JSON.stringify(header), JSON.stringify(payload), privateKey);
 
-            // Get Access Token
-            const tokenResp = await fetch(tokenEndpoint, {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams({
-                    scope: "system/Patient.read",
-                    grant_type: "client_credentials",
-                    client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-                    client_assertion: jwt
-                })
-            });
+        const tokenResp = await fetch(tokenEndpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            scope: "system/Patient.read",
+            grant_type: "client_credentials",
+            client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+            client_assertion: jwt
+          })
+        });
 
-            const tokenJson = await tokenResp.json();
+        const tokenJson = await tokenResp.json();
+        if (!tokenJson.access_token) throw new Error(JSON.stringify(tokenJson, null, 2));
 
-            if (!tokenJson.access_token) {
-                document.getElementById("output").innerText = "Token error:\n" + JSON.stringify(tokenJson, null, 2);
-                return;
-            }
+        const patientResp = await fetch(`${fhirBaseUrl}/Patient/${patientId}`, {
+          headers: {
+            Authorization: `Bearer ${tokenJson.access_token}`,
+            Accept: "application/fhir+json"
+          }
+        });
 
-            // Use token to call FHIR Patient API
-            const patientResp = await fetch(`${fhirBaseUrl}/Patient/${patientId}`, {
-                headers: {
-                    Authorization: `Bearer ${tokenJson.access_token}`,
-                    Accept: "application/fhir+json"
-                }
-            });
+        const patientData = await patientResp.json();
+        output.textContent = JSON.stringify(patientData, null, 2);
+      } catch (err) {
+        output.textContent = "❌ Error:\n" + err.message;
+      } finally {
+        loader.style.display = "none";
+        output.style.display = "block";
+      }
+    }
 
-            const patientData = await patientResp.json();
-            document.getElementById("output").innerText = JSON.stringify(patientData, null, 2);
-        }
-    </script>
+    document.getElementById("fetchBtn").addEventListener("click", fetchPatient);
+  </script>
 </body>
 </html>
