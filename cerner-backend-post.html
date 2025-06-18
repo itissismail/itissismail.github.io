@@ -40,7 +40,7 @@
 
     <div class="section">
       <h5>🔍 Get Patient Details</h5>
-      <input type="text" class="form-control" id="patientId" placeholder="Enter Patient ID (e.g., e8cL5OXKANxo9J7NHjhznXw3)" />
+      <input type="text" class="form-control" id="patientId" placeholder="Enter Patient ID (e.g., 12724066)" />
       <button class="btn btn-success mt-2" onclick="fetchPatient()">Fetch Patient</button>
       <div id="loader1" class="spinner-border text-primary mt-3" role="status"></div>
       <pre id="patientResult" class="mt-2">Awaiting input...</pre>
@@ -48,7 +48,53 @@
 
     <div class="section">
       <h5>📝 Post Condition Resource</h5>
-      <textarea id="conditionInput" class="form-control" rows="10" placeholder='Paste Condition Resource JSON here'></textarea>
+      <textarea id="conditionInput" class="form-control" rows="10" placeholder='Paste Condition Resource JSON here e.g 
+      {
+        "resourceType": "Condition",
+       "verificationStatus": {
+           "coding": [
+               {
+                   "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+                   "code": "provisional",
+                   "display": "Provisional"
+               }
+           ],
+           "text": "Provisional"
+       },
+       "code": {
+           "text": "Pneumonia",
+           "coding": [
+               {
+                   "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                   "code": "J18.9"
+               }
+           ]
+       },
+       "category": [
+           {
+               "coding": [
+                   {
+                       "system": "http://hl7.org/fhir/condition-category",
+                       "code": "problem-list-item",
+                       "display": "Problem List Item"
+                   }
+               ],
+               "text": "Problem List Item"
+           }
+       ],
+       "subject": {
+           "reference": "Patient/e63wRTbPfr1p8UW81d8Seiw3"
+       },
+       "onsetDateTime": "2020-12-27",
+       "onsetPeriod": {
+           "end": "2020-12-27"
+       },
+       "note": [
+           {
+               "text": "This is the comment for the note."
+           }
+       ]
+   }'></textarea>
       <button class="btn btn-warning mt-2" onclick="postCondition()">Submit</button>
       <div id="loader2" class="spinner-border text-warning mt-3" role="status"></div>
       <pre id="conditionResult" class="mt-2">Awaiting input...</pre>
@@ -69,7 +115,7 @@
       loader.style.display = "inline-block";
       resBox.textContent = "Loading...";
       try {
-        const response = await fetch(`${BASE_URL}/patient/${id}`);
+        const response = await fetch(`${BASE_URL}/cerner/patient/${id}`);
         const data = await response.json();
         resBox.textContent = JSON.stringify(data, null, 2);
       } catch (error) {
@@ -81,15 +127,13 @@
 
     async function postCondition() {
       const input = document.getElementById("conditionInput").value;
-
       const loader = document.getElementById("loader2");
       const resBox = document.getElementById("conditionResult");
       loader.style.display = "inline-block";
-
       resBox.textContent = "Submitting...";
       try {
         const jsonData = JSON.parse(input);
-        const response = await fetch(`${BASE_URL}/condition`, {
+        const response = await fetch(`${BASE_URL}/cerner/condition`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(jsonData)
