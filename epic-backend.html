@@ -92,6 +92,7 @@ nE5Rc42tBuAwJ/6AgegM6BQ=
           jti: Math.random().toString(36).substring(2)
         };
         const header = { alg: "RS384", typ: "JWT", kid:"1EBx0b3f8kKtQAW7NdbiA7Tx17yuyxWa" };
+
         const jwt = KJUR.jws.JWS.sign("RS384", JSON.stringify(header), JSON.stringify(payload), privateKey);
 
         const tokenResp = await fetch(tokenEndpoint, {

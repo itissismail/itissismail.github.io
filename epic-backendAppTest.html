@@ -81,9 +81,11 @@
 
     async function postCondition() {
       const input = document.getElementById("conditionInput").value;
+
       const loader = document.getElementById("loader2");
       const resBox = document.getElementById("conditionResult");
       loader.style.display = "inline-block";
+
       resBox.textContent = "Submitting...";
       try {
         const jsonData = JSON.parse(input);
